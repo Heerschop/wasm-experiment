@@ -17,6 +17,17 @@ emcc hello.c -o hello.html
 npx serve .
 ```
 
+### [Run .NET from JavaScript](https://devblogs.microsoft.com/dotnet/use-net-7-from-any-javascript-app-in-net-7/)
+```bash
+export PATH=$(pwd)/dotnet/dotnet-sdk:$PATH
+code .
+cd dotnet
+
+dotnet workload install wasm-tools
+dotnet workload install wasm-experimental
+dotnet new wasmbrowser
+```
+
 ### Resources
 
 - [Mozilla WebAssembly](https://developer.mozilla.org/en-US/docs/WebAssembly)
