@@ -1,0 +1,23 @@
+{
+  "name": "wasm-experiment",
+  "version": "1.0.0",
+  "description": "### [AssemblyScript](https://www.assemblyscript.org/getting-started.html)",
+  "main": "index.js",
+  "scripts": {
+    "start": "wds --node-resolve --open --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Heerschop/wasm-experiment.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Heerschop/wasm-experiment/issues"
+  },
+  "homepage": "https://github.com/Heerschop/wasm-experiment#readme",
+  "devDependencies": {
+    "@web/dev-server": "^0.1.35",
+    "typescript": "^4.9.3"
+  }
+}
