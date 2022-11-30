@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "serve": [
+      "rm -rf ./src/*.js",
+      [
+        ["src", "tsc --watch"],
+        "wds --node-resolve --open --watch"
+      ]
+    ]
+  }
+}

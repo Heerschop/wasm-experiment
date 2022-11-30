@@ -1,0 +1,10 @@
+{
+  "menu": {
+    "serve": "serve"
+  },
+  "options": {
+    "menu": {
+      "defaultChoice": ""
+    }
+  }
+}

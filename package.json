@@ -4,7 +4,7 @@
   "description": "### [AssemblyScript](https://www.assemblyscript.org/getting-started.html)",
   "main": "index.js",
   "scripts": {
-    "start": "wds --node-resolve --open --watch"
+    "start": "launch"
   },
   "repository": {
     "type": "git",
@@ -18,6 +18,7 @@
   "homepage": "https://github.com/Heerschop/wasm-experiment#readme",
   "devDependencies": {
     "@web/dev-server": "^0.1.35",
+    "script-launcher": "^1.37.3",
     "typescript": "^4.9.3"
   }
 }
