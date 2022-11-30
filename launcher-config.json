@@ -3,9 +3,20 @@
     "serve": [
       "rm -rf ./src/*.js",
       [
-        ["src", "tsc --watch"],
+        [
+          "src",
+          "tsc --watch"
+        ],
         "wds --node-resolve --open --watch"
       ]
+    ],
+    "lint:check": "eslint",
+    "lint:write": "eslint --fix",
+    "pretty:check": [
+      "prettier --check ."
+    ],
+    "pretty:write": [
+      "prettier --write ."
     ]
   }
 }
