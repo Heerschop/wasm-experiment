@@ -5,11 +5,11 @@
       "code style": {
         "check:Check files": [
           "pretty:check || true",
-          "#lint:check || true"
+          "lint:check || true"
         ],
         "write:Update files": [
           "pretty:write",
-          "#lint:write"
+          "lint:write"
         ]
       }
     }
