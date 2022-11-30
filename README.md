@@ -33,6 +33,10 @@ dotnet workload install wasm-experimental
 dotnet run -c Debug/Release
 ```
 
+### [Compiling from Rust to WebAssembly](https://developer.mozilla.org/en-US/docs/WebAssembly/Rust_to_wasm)
+```bash
+```
+
 ### Resources
 
 - [Mozilla WebAssembly](https://developer.mozilla.org/en-US/docs/WebAssembly)
