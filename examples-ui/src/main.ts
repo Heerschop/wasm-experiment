@@ -6,18 +6,50 @@ async function loadWasmModule(url: string): Promise<WebAssembly.Module> {
 }
 
 async function onLoadModuleClick(url: string): Promise<{}> {
-  console.log('Loading module:', url);
+  try {
+    console.log('Loading module:', url);
 
-  const module = await loadWasmModule(url);
+    const module = await loadWasmModule(url);
 
-  return {
-    exports: WebAssembly.Module.exports(module),
-    imports: WebAssembly.Module.imports(module)
-  };
+    return {
+      exports: WebAssembly.Module.exports(module),
+      imports: WebAssembly.Module.imports(module)
+    };
+  } catch (error) {
+    return {
+      error: error
+    };
+  }
 }
 
 async function onInstantiateClick(url: string): Promise<{}> {
-  return {};
+  try {
+    console.log('Loading module:', url);
+
+    const module = await loadWasmModule(url);
+    const instance = await WebAssembly.instantiate(module);
+
+    if (instance.exports.add) {
+      const result = instance.exports.add(10, 20);
+
+      console.log('result', result);
+    }
+
+    return {
+      module: {
+        exports: WebAssembly.Module.exports(module),
+        imports: WebAssembly.Module.imports(module)
+      },
+      instance: {
+        exports: instance.exports
+      }
+    };
+  } catch (error: any) {
+    console.log(error);
+    return {
+      error: `${error}`
+    };
+  }
 }
 async function onUploadWasmClick(url: string): Promise<{}> {
   return {};
