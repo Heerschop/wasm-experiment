@@ -34,10 +34,13 @@ dotnet run -c Debug/Release
 ```
 
 ### [Compiling from Rust to WebAssembly](https://developer.mozilla.org/en-US/docs/WebAssembly/Rust_to_wasm)
+
 ```bash
+
 ```
 
 ### Examples UI
+
 ```bash
 cd examples-ui
 npm install

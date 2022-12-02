@@ -1,7 +1,7 @@
 async function onClickAssemblyScript() {
   console.log('onClickAssemblyScript');
 
-  const module = await loadWasmModule('examples/assembly-script.wasm')
+  const module = await loadWasmModule('examples/assembly-script.wasm');
 
   console.log(module);
 }
@@ -9,7 +9,7 @@ async function onClickAssemblyScript() {
 async function onClickEmscripten() {
   console.log('onClickEmscripten');
 
-  const module = await loadWasmModule('examples/emscripten-c.wasm')
+  const module = await loadWasmModule('examples/emscripten-c.wasm');
 
   console.log(module);
 }
@@ -17,7 +17,7 @@ async function onClickEmscripten() {
 async function onClickDotnet() {
   console.log('onClickDotnet');
 
-  const module = await loadWasmModule('examples/dotnet.wasm')
+  const module = await loadWasmModule('examples/dotnet.wasm');
 
   console.log(module);
 }
