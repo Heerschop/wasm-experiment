@@ -8,9 +8,46 @@
     <link rel="stylesheet" href="main.css" />
   </head>
   <body>
-    <button onclick="onClickAssemblyScript()">Assembly Script</button>
-    <button onclick="onClickEmscripten()">emscripten-c</button>
-    <button onclick="onClickDotnet()">dotnet</button>
+    <!-- onClickSubmit(event) -->
+    <form action="#" onsubmit="onClickSubmit(event); return false;">
+      <div class="wrap-container">
+        <div class="card">
+          <h1>File</h1>
+          <label class="radio-button"
+            >Assembly Script
+            <input type="radio" checked="checked" name="radio" value="assembly-script.wasm" />
+            <span class="checkmark"></span>
+          </label>
+          <label class="radio-button"
+            >Emscripten-c
+            <input type="radio" name="radio" value="emscripten-c.wasm" />
+            <span class="checkmark"></span>
+          </label>
+          <label class="radio-button"
+            >Dotnet
+            <input type="radio" name="radio" value="dotnet.wasm" />
+            <span class="checkmark"></span>
+          </label>
+          <label class="radio-button"
+            >Uploaded
+            <input type="radio" name="radio" value="uploaded.wasm" />
+            <span class="checkmark"></span>
+          </label>
+        </div>
+
+        <div class="card">
+          <h1>Action</h1>
+          <button id="load-module">Load module</button>
+          <button id="instantiate">Instantiate</button>
+          <button id="upload-wasm">Upload WASM</button>
+        </div>
+        <div class="card">
+          <h1>Result</h1>
+          <textarea id="result-text"></textarea>
+        </div>
+      </div>
+    </form>
+
     <script src="main.js"></script>
   </body>
 </html>

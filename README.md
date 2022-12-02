@@ -44,7 +44,7 @@ dotnet run -c Debug/Release
 ```bash
 cd examples-ui
 npm install
-npm start
+npm start serve
 ```
 
 ### Resources
