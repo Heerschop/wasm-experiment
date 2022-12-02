@@ -42,6 +42,7 @@ dotnet run -c Debug/Release
 * [Install Rust](https://www.rust-lang.org/tools/install)
 
 ```bash
+cd rust
 
 ```
 
