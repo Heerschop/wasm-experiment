@@ -1,20 +1,26 @@
 {
   "scripts": {
     "serve": [
-      "rm -rf ./src/*.js",
+      "clean",
+      "copy:wasms",
+      "build:ui",
       [
-        [
-          "src",
-          "tsc --watch"
-        ],
+        "build:ui --watch",
         "wds --node-resolve --open --watch"
       ]
     ],
-    "build:wasms": [
-      "rm -rf ./src/examples/*.wasm",
-      "cpy --flat --rename=assembly-script.wasm './assembly-script/build/release.wasm'                       './src/examples'",
-      "cpy --flat                               './dotnet/bin/Debug/Release/net7.0/browser-wasm/dotnet.wasm' './src/examples'",
-      "cpy --flat --rename=emscripten-c.wasm    './emscripten-c/hello.wasm'                                  './src/examples'"
+    "build:ui": [
+      "src",
+      "tsc $1"
+    ],
+    "copy:wasms": [
+      "cpy --flat --rename=assembly-script.wasm '../assembly-script/build/release.wasm'                       './src/examples'",
+      "cpy --flat                               '../dotnet/bin/Debug/Release/net7.0/browser-wasm/dotnet.wasm' './src/examples'",
+      "cpy --flat --rename=emscripten-c.wasm    '../emscripten-c/hello.wasm'                                  './src/examples'"
+    ],
+    "clean": [
+      "rm -rf ./src/*.js",
+      "rm -rf ./src/examples/*.wasm"
     ],
     "lint:check": "eslint",
     "lint:write": "eslint --fix",
