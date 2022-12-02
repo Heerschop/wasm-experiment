@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <!-- onClickSubmit(event) -->
+    <form action="#" onsubmit="onClickSubmit(event); return false;">
+      <div class="wrap-container">
+        <div class="card">
+          <h1>File</h1>
+          <label class="radio-button">
+            Assembly Script
+            <input type="radio" checked="checked" name="radio" value="assembly-script.wasm" />
+            <span class="checkmark"></span>
+          </label>
+          <label class="radio-button">
+            Emscripten-c
+            <input type="radio" name="radio" value="emscripten-c.wasm" />
+            <span class="checkmark"></span>
+          </label>
+          <label class="radio-button">
+            Dotnet
+            <input type="radio" name="radio" value="dotnet.wasm" />
+            <span class="checkmark"></span>
+          </label>
+          <label class="radio-button">
+            Uploaded
+            <input type="radio" name="radio" value="uploaded.wasm" disabled />
+            <span class="checkmark"></span>
+          </label>
+        </div>
+
+        <div class="card">
+          <h1>Action</h1>
+          <button id="load-module">Load module</button>
+          <button id="instantiate" disabled>Instantiate</button>
+          <button id="upload-wasm" disabled>Upload WASM</button>
+        </div>
+        <div class="card">
+          <h1>Result</h1>
+          <textarea id="result-text"></textarea>
+        </div>
+      </div>
+    </form>
+
+    <script src="main.js"></script>
+  </body>
+</html>

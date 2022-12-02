@@ -1,0 +1,159 @@
+body {
+  margin: 0;
+  font-family: 'Varela Round', sans-serif;
+  font-size: var(--S6);
+  color: var(--prim-text);
+  background: var(--primary);
+}
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+:root {
+  font-size: 62.5%;
+
+  --primary: #383a3f;
+  --prim-light: #62646a;
+  --prim-dark: #1f2124;
+  --prim-text: #ffffffe0;
+
+  --secondary: #f68657;
+  --sec-light: #f6b352;
+  --sec-dark: #be572c;
+  --sec-text: #000000e0;
+
+  --S0: 0rem;
+  --S1: 0.2rem;
+  --S2: 0.4rem;
+  --S3: 0.6rem;
+  --S4: 0.8rem;
+  --S5: 1.2rem;
+  --S6: 1.6rem;
+  --S7: 2rem;
+  --S8: 2.4rem;
+  --S9: 2.8rem;
+  --S10: 3.2rem;
+  --S11: 3.6rem;
+  --S12: 4rem;
+  --S13: 4.2rem;
+
+  --MAX: 999;
+}
+
+.wrap-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  margin-top: 6%;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--prim-dark);
+  border-radius: var(--S2);
+  margin: var(--S7);
+  padding: var(--S9);
+  min-width: 40rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  gap: var(--S5);
+}
+
+.card h1 {
+  color: var(--prim-text);
+  text-align: center;
+  font-weight: 200;
+  margin-top: 0px;
+  margin-bottom: var(--S7);
+}
+
+button {
+  display: block;
+  background: var(--sec-light);
+  color: var(--primary);
+  font-weight: 600;
+  padding: 15px 20px;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.9);
+  transition: all 200ms ease-in-out;
+  text-decoration: none;
+  border: none;
+  font-size: var(--S6);
+  cursor: pointer;
+}
+
+button:hover {
+  background: var(--secondary);
+}
+button:disabled {
+  background: var(--prim-light);
+}
+
+.checkmark {
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+.radio-button {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: var(--sec-light);
+}
+
+.radio-button input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: var(--prim-text);
+  border-radius: 50%;
+}
+
+.radio-button:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.radio-button input:checked ~ .checkmark {
+  background-color: var(--sec-light);
+}
+
+.checkmark:after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+
+.radio-button input:checked ~ .checkmark:after {
+  display: block;
+}
+.radio-button input:disabled ~ .checkmark {
+  background: var(--prim-light);
+}
+
+.radio-button .checkmark:after {
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--prim-text);
+}
