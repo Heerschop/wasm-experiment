@@ -87,6 +87,9 @@ button {
 button:hover {
   background: var(--secondary);
 }
+button:disabled {
+  background: var(--prim-light);
+}
 
 .checkmark {
   height: 25px;
@@ -107,7 +110,6 @@ button:hover {
   -ms-user-select: none;
   user-select: none;
   color: var(--sec-light);
-
 }
 
 .radio-button input {
@@ -142,6 +144,9 @@ button:hover {
 
 .radio-button input:checked ~ .checkmark:after {
   display: block;
+}
+.radio-button input:disabled ~ .checkmark {
+  background: var(--prim-light);
 }
 
 .radio-button .checkmark:after {

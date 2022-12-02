@@ -13,24 +13,24 @@
       <div class="wrap-container">
         <div class="card">
           <h1>File</h1>
-          <label class="radio-button"
-            >Assembly Script
+          <label class="radio-button">
+            Assembly Script
             <input type="radio" checked="checked" name="radio" value="assembly-script.wasm" />
             <span class="checkmark"></span>
           </label>
-          <label class="radio-button"
-            >Emscripten-c
+          <label class="radio-button">
+            Emscripten-c
             <input type="radio" name="radio" value="emscripten-c.wasm" />
             <span class="checkmark"></span>
           </label>
-          <label class="radio-button"
-            >Dotnet
+          <label class="radio-button">
+            Dotnet
             <input type="radio" name="radio" value="dotnet.wasm" />
             <span class="checkmark"></span>
           </label>
-          <label class="radio-button"
-            >Uploaded
-            <input type="radio" name="radio" value="uploaded.wasm" />
+          <label class="radio-button">
+            Uploaded
+            <input type="radio" name="radio" value="uploaded.wasm" disabled />
             <span class="checkmark"></span>
           </label>
         </div>
@@ -38,8 +38,8 @@
         <div class="card">
           <h1>Action</h1>
           <button id="load-module">Load module</button>
-          <button id="instantiate">Instantiate</button>
-          <button id="upload-wasm">Upload WASM</button>
+          <button id="instantiate" disabled>Instantiate</button>
+          <button id="upload-wasm" disabled>Upload WASM</button>
         </div>
         <div class="card">
           <h1>Result</h1>
