@@ -37,6 +37,13 @@ dotnet run -c Debug/Release
 ```bash
 ```
 
+### Examples UI
+```bash
+cd examples-ui
+npm install
+npm start
+```
+
 ### Resources
 
 - [Mozilla WebAssembly](https://developer.mozilla.org/en-US/docs/WebAssembly)
