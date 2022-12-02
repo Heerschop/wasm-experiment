@@ -16,7 +16,8 @@
     "copy:wasms": [
       "cpy --flat --rename=assembly-script.wasm '../assembly-script/build/release.wasm'                       './src/examples'",
       "cpy --flat                               '../dotnet/bin/Debug/Release/net7.0/browser-wasm/dotnet.wasm' './src/examples'",
-      "cpy --flat --rename=emscripten-c.wasm    '../emscripten-c/hello.wasm'                                  './src/examples'"
+      "cpy --flat --rename=emscripten-c.wasm    '../emscripten-c/hello.wasm'                                  './src/examples'",
+      "cpy --flat --rename=rust.wasm            '../rust/pkg/hello_wasm_bg.wasm'                              './src/examples'"
     ],
     "clean": [
       "rm -rf ./src/*.js",

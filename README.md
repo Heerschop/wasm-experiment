@@ -44,6 +44,9 @@ dotnet run -c Debug/Release
 ```bash
 cd rust
 
+wasm-pack build --target web
+
+npx serve .
 ```
 
 ### Examples UI
