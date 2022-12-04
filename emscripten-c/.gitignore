@@ -1,4 +1,4 @@
 emsdk
-hello.js
-hello.wasm
-hello.html
+emscripten-c.js
+emscripten-c.wasm
+emscripten-c.html

@@ -19,6 +19,25 @@
   "homepage": "https://github.com/Heerschop/wasm-experiment#readme",
   "devDependencies": {
     "parcel": "^2.8.0",
-    "parcel-reporter-clean-dist": "^1.0.4"
-  }
+    "parcel-reporter-clean-dist": "^1.0.4",
+    "parcel-reporter-copy-file-v2": "^1.0.1"
+  },
+  "copyStaticFiles": [
+    {
+      "from": "../assembly-script/build/assembly-script-release.wasm",
+      "to": "dist/examples"
+    },
+    {
+      "from": "../dotnet/bin/Debug/Release/net7.0/browser-wasm/dotnet.wasm",
+      "to": "dist/examples"
+    },
+    {
+      "from": "../emscripten-c/emscripten-c.wasm",
+      "to": "dist/examples"
+    },
+    {
+      "from": "../rust/pkg/rust.wasm",
+      "to": "dist/examples"
+    }
+  ]
 }

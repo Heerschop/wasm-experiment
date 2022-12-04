@@ -19,7 +19,7 @@ cd emscripten-c
 
 source ./emsdk/emsdk_env.sh
 
-emcc hello.c -o hello.html
+emcc hello.c -o emscripten-c.html
 npx serve .
 ```
 
@@ -47,7 +47,7 @@ dotnet run -c Debug/Release
 ```bash
 cd rust
 
-wasm-pack build --target web
+wasm-pack build --target web --out-name rust.wasm
 
 npx serve .
 ```
