@@ -20,6 +20,7 @@ cd emscripten-c
 source ./emsdk/emsdk_env.sh
 
 emcc hello.c -o emscripten-c.html
+
 npx serve .
 ```
 
@@ -37,7 +38,7 @@ cd dotnet
 dotnet workload install wasm-tools
 dotnet workload install wasm-experimental
 
-dotnet run -c Debug/Release
+dotnet run
 ```
 
 ### [Compiling from Rust to WebAssembly](https://developer.mozilla.org/en-US/docs/WebAssembly/Rust_to_wasm)
@@ -47,7 +48,7 @@ dotnet run -c Debug/Release
 ```bash
 cd rust
 
-wasm-pack build --target web --out-name rust.wasm
+wasm-pack build --target web --out-name rust
 
 npx serve .
 ```

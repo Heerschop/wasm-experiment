@@ -28,7 +28,7 @@
       "to": "dist/examples"
     },
     {
-      "from": "../dotnet/bin/Debug/Release/net7.0/browser-wasm/dotnet.wasm",
+      "from": "../dotnet/bin/Debug/net7.0/browser-wasm/dotnet.wasm",
       "to": "dist/examples"
     },
     {
@@ -36,7 +36,7 @@
       "to": "dist/examples"
     },
     {
-      "from": "../rust/pkg/rust.wasm",
+      "from": "../rust/pkg/rust_bg.wasm",
       "to": "dist/examples"
     }
   ]
