@@ -1,11 +1,8 @@
 {
   "name": "wasm-experiment",
   "version": "1.0.0",
-  "description": "### [AssemblyScript](https://www.assemblyscript.org/getting-started.html)",
-  "main": "index.js",
-  "scripts": {
-    "start": "launch"
-  },
+  "description": "WASM Experiments UI",
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Heerschop/wasm-experiment.git"
@@ -17,12 +14,6 @@
   },
   "homepage": "https://github.com/Heerschop/wasm-experiment#readme",
   "devDependencies": {
-    "@web/dev-server": "^0.1.35",
-    "cpy-cli": "^4.2.0",
-    "eslint": "^8.28.0",
-    "prettier": "^2.8.0",
-    "rimraf": "^3.0.2",
-    "script-launcher": "^1.37.3",
-    "typescript": "^4.9.3"
+    "parcel": "^2.8.0"
   }
 }
