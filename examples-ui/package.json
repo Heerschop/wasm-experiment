@@ -1,8 +1,12 @@
 {
   "name": "wasm-experiment",
+  "source": "src/index.html",
   "version": "1.0.0",
   "description": "WASM Experiments UI",
-  "scripts": {},
+  "scripts": {
+    "start": "rimraf dist && parcel",
+    "build": "rimraf dist && parcel build"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Heerschop/wasm-experiment.git"
@@ -14,6 +18,7 @@
   },
   "homepage": "https://github.com/Heerschop/wasm-experiment#readme",
   "devDependencies": {
-    "parcel": "^2.8.0"
+    "parcel": "^2.8.0",
+    "rimraf": "^3.0.2"
   }
 }
