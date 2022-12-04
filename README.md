@@ -4,6 +4,7 @@
 
 ```bash
 cd assembly-script
+
 npm install
 npm run asbuild
 npm start
@@ -15,6 +16,7 @@ npm start
 
 ```bash
 cd emscripten-c
+
 source ./emsdk/emsdk_env.sh
 
 emcc hello.c -o hello.html
@@ -29,6 +31,7 @@ npx serve .
 ```bash
 export PATH=$(pwd)/dotnet/dotnet-sdk:$PATH
 code .
+
 cd dotnet
 
 dotnet workload install wasm-tools
@@ -53,8 +56,9 @@ npx serve .
 
 ```bash
 cd examples-ui
+
 npm install
-npm start serve
+npm start
 ```
 
 ### Resources
