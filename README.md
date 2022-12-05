@@ -56,7 +56,7 @@ npx serve .
 ### Examples UI
 
 ```bash
-cd examples-ui
+cd wasm-inspector
 
 npm install
 npm start
