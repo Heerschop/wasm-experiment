@@ -38,6 +38,10 @@
     {
       "from": "../rust/pkg/rust_bg.wasm",
       "to": "dist/examples"
+    },
+    {
+      "from": "../wat2wasm/wat2wasm.wasm",
+      "to": "dist/examples"
     }
   ]
 }

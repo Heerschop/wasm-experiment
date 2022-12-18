@@ -53,6 +53,16 @@ wasm-pack build --target web --out-name rust
 npx serve .
 ```
 
+### [wat2wasm](https://webassembly.org/getting-started/advanced-tools/)
+
+```bash
+cd wat2wasm
+
+export PATH=$(pwd)/wabt/bin:$PATH
+
+wat2wasm example.wat
+```
+
 ### Examples UI
 
 ```bash
@@ -66,3 +76,4 @@ npm start
 
 - [Mozilla WebAssembly](https://developer.mozilla.org/en-US/docs/WebAssembly)
 - [WebAssembly](https://webassembly.org/)
+- [WebAssembly for VSCode](https://marketplace.visualstudio.com/items?itemName=dtsvet.vscode-wasm)

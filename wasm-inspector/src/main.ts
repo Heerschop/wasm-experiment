@@ -32,7 +32,13 @@ async function onInstantiateClick(url: string): Promise<{}> {
     if (instance.exports.add) {
       const result = instance.exports.add(10, 20);
 
-      console.log('result', result);
+      console.log('result:', result);
+    }
+
+    if (instance.exports.mul) {
+      const result = instance.exports.mul(10, 20);
+
+      console.log('result:', result);
     }
 
     return {
