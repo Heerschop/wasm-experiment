@@ -26,23 +26,23 @@
     "copy": [
       {
         "source": "../assembly-script/build/assembly-script-release.wasm",
-        "target": "dist/examples/"
+        "target": "examples/assembly-script-release.wasm"
       },
       {
         "source": "../dotnet/bin/Debug/net7.0/browser-wasm/dotnet.wasm",
-        "target": "dist/examples/"
+        "target": "examples/dotnet.wasm"
       },
       {
-        "source": "../emscripten-c/emscripten-c.wasm",
-        "target": "dist/examples/"
+        "source": "../emscripten-c/hello.wasm",
+        "target": "examples/emscripten-c.wasm"
       },
       {
-        "source": "../rust/pkg/rust_bg.wasm",
-        "target": "dist/examples/"
+        "source": "../rust/pkg/hello_wasm_bg.wasm",
+        "target": "examples/rust_bg.wasm"
       },
       {
-        "source": "../wat2wasm/wat2wasm.wasm",
-        "target": "dist/examples/"
+        "source": "../wat2wasm/example.wasm",
+        "target": "examples/wat2wasm.wasm"
       }
     ]
   }

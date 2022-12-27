@@ -19,7 +19,7 @@ cd emscripten-c
 
 source ./emsdk/emsdk_env.sh
 
-emcc hello.c -o emscripten-c.html
+emcc hello.c -o hello.html
 
 npx serve .
 ```
@@ -48,7 +48,7 @@ dotnet run
 ```bash
 cd rust
 
-wasm-pack build --target web --out-name rust
+wasm-pack build --target web
 
 npx serve .
 ```
@@ -63,7 +63,7 @@ export PATH=$(pwd)/wabt/bin:$PATH
 wat2wasm example.wat
 ```
 
-### Examples UI
+### Wasm inspector
 
 ```bash
 cd wasm-inspector
