@@ -19,29 +19,31 @@
   "homepage": "https://github.com/Heerschop/wasm-experiment#readme",
   "devDependencies": {
     "parcel": "^2.8.0",
-    "parcel-reporter-clean-dist": "^1.0.4",
-    "parcel-reporter-copy-file-v2": "^1.0.1"
+    "parcel-reporter-files": "file:parcel-reporter-files"
   },
-  "copyStaticFiles": [
-    {
-      "from": "../assembly-script/build/assembly-script-release.wasm",
-      "to": "dist/examples"
-    },
-    {
-      "from": "../dotnet/bin/Debug/net7.0/browser-wasm/dotnet.wasm",
-      "to": "dist/examples"
-    },
-    {
-      "from": "../emscripten-c/emscripten-c.wasm",
-      "to": "dist/examples"
-    },
-    {
-      "from": "../rust/pkg/rust_bg.wasm",
-      "to": "dist/examples"
-    },
-    {
-      "from": "../wat2wasm/wat2wasm.wasm",
-      "to": "dist/examples"
-    }
-  ]
+  "parcel-reporter-files": {
+    "remove": "*",
+    "copy": [
+      {
+        "source": "../assembly-script/build/assembly-script-release.wasm",
+        "target": "dist/examples/"
+      },
+      {
+        "source": "../dotnet/bin/Debug/net7.0/browser-wasm/dotnet.wasm",
+        "target": "dist/examples/"
+      },
+      {
+        "source": "../emscripten-c/emscripten-c.wasm",
+        "target": "dist/examples/"
+      },
+      {
+        "source": "../rust/pkg/rust_bg.wasm",
+        "target": "dist/examples/"
+      },
+      {
+        "source": "../wat2wasm/wat2wasm.wasm",
+        "target": "dist/examples/"
+      }
+    ]
+  }
 }

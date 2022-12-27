@@ -4,7 +4,6 @@
   ],
   "reporters": [
     "...",
-    "parcel-reporter-clean-dist",
-    "parcel-reporter-copy-file-v2"
+    "parcel-reporter-files"
   ]
 }
