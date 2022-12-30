@@ -19,7 +19,7 @@
   "homepage": "https://github.com/Heerschop/wasm-experiment#readme",
   "devDependencies": {
     "parcel": "^2.8.0",
-    "parcel-reporter-files": "file:parcel-reporter-files"
+    "parcel-reporter-files": "github:Heerschop/parcel-reporter-files#main"
   },
   "parcel-reporter-files": {
     "remove": "*",
