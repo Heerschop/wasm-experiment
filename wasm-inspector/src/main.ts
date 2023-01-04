@@ -1,11 +1,11 @@
-async function loadWasmModule(url: string): Promise<WebAssembly.Module> {
+export async function loadWasmModule(url: string): Promise<WebAssembly.Module> {
   const response = await fetch(url);
   const buffer = await response.arrayBuffer();
 
   return WebAssembly.compile(buffer);
 }
 
-async function onLoadModuleClick(url: string): Promise<{}> {
+export async function onLoadModuleClick(url: string): Promise<{}> {
   try {
     console.log('Loading module:', url);
 
@@ -13,16 +13,16 @@ async function onLoadModuleClick(url: string): Promise<{}> {
 
     return {
       exports: WebAssembly.Module.exports(module),
-      imports: WebAssembly.Module.imports(module)
+      imports: WebAssembly.Module.imports(module),
     };
   } catch (error) {
     return {
-      error: error
+      error: error,
     };
   }
 }
 
-async function onInstantiateClick(url: string): Promise<{}> {
+export async function onInstantiateClick(url: string): Promise<{}> {
   try {
     console.log('Loading module:', url);
 
@@ -30,13 +30,13 @@ async function onInstantiateClick(url: string): Promise<{}> {
     const instance = await WebAssembly.instantiate(module);
 
     if (instance.exports.add) {
-      const result = instance.exports.add(10, 20);
+      const result = (instance.exports.add as CallableFunction)(10, 20);
 
       console.log('result:', result);
     }
 
     if (instance.exports.mul) {
-      const result = instance.exports.mul(10, 20);
+      const result = (instance.exports.mul as CallableFunction)(10, 20);
 
       console.log('result:', result);
     }
@@ -44,28 +44,28 @@ async function onInstantiateClick(url: string): Promise<{}> {
     return {
       module: {
         exports: WebAssembly.Module.exports(module),
-        imports: WebAssembly.Module.imports(module)
+        imports: WebAssembly.Module.imports(module),
       },
       instance: {
-        exports: instance.exports
-      }
+        exports: instance.exports,
+      },
     };
   } catch (error: any) {
     console.log(error);
     return {
-      error: `${error}`
+      error: `${error}`,
     };
   }
 }
-async function onUploadWasmClick(url: string): Promise<{}> {
+export async function onUploadWasmClick(url: string): Promise<{}> {
   return {};
 }
 
-async function onClickSubmit(event: SubmitEvent) {
+export async function onClickSubmit(event: SubmitEvent) {
   const actionLookup: { [name: string]: ((file: string) => Promise<{}>) | undefined } = {
     'load-module': onLoadModuleClick,
-    'instantiate': onInstantiateClick,
-    'upload-wasm': onUploadWasmClick
+    instantiate: onInstantiateClick,
+    'upload-wasm': onUploadWasmClick,
   };
 
   if (event.submitter?.id && event.target) {
@@ -73,14 +73,14 @@ async function onClickSubmit(event: SubmitEvent) {
     const elements: HTMLInputElement[] = Object.values(event.target);
 
     if (handler !== undefined) {
-      const resultElement = elements.find(item => item.id === 'result-text');
+      const resultElement = elements.find((item) => item.id === 'result-text');
 
       console.log('resultElement:', resultElement);
 
       const values = elements
-        .filter(element => element.checked)
-        .map(element => ({
-          value: element.value
+        .filter((element) => element.checked)
+        .map((element) => ({
+          value: element.value,
         }));
 
       if (values.length > 0 && resultElement) {

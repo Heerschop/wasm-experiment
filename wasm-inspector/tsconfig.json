@@ -2,6 +2,7 @@
   "compilerOptions": {
     "experimentalDecorators": true,
     "strict": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "lib": ["es2017", "dom"]
   }
 }
