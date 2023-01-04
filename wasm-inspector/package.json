@@ -11,14 +11,17 @@
     "type": "git",
     "url": "git+https://github.com/Heerschop/wasm-experiment.git"
   },
-  "author": "",
+  "author": "Bas Heerschop",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Heerschop/wasm-experiment/issues"
   },
   "homepage": "https://github.com/Heerschop/wasm-experiment#readme",
+  "dependencies": {
+    "lit": "^2.5.0"
+  },
   "devDependencies": {
-    "parcel": "^2.8.0",
+    "parcel": "^2.8.2",
     "parcel-reporter-files": "github:Heerschop/parcel-reporter-files#main"
   },
   "parcel-reporter-files": {
