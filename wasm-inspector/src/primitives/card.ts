@@ -18,7 +18,6 @@ export class CardElement extends LitElement {
       flex-direction: column;
       background: var(--prim-dark);
       border-radius: var(--S2);
-      margin: var(--S7);
       padding: var(--S9);
       min-width: 40rem;
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
