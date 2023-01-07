@@ -43,7 +43,7 @@ dotnet run
 
 ### [Compiling from Rust to WebAssembly](https://developer.mozilla.org/en-US/docs/WebAssembly/Rust_to_wasm)
 
-* [Install Rust](https://www.rust-lang.org/tools/install)
+- [Install Rust](https://www.rust-lang.org/tools/install)
 
 ```bash
 cd rust
@@ -74,6 +74,9 @@ npm start
 
 ### Resources
 
+- [Web Components](https://developer.mozilla.org/en-US/docs/Web/Web_Components)
 - [Mozilla WebAssembly](https://developer.mozilla.org/en-US/docs/WebAssembly)
 - [WebAssembly](https://webassembly.org/)
 - [WebAssembly for VSCode](https://marketplace.visualstudio.com/items?itemName=dtsvet.vscode-wasm)
+- [LitElement prevents form submit event from bubbling](https://github.com/lit/lit-element/issues/832)
+- [Form-associated custom elements: being a submit button](https://github.com/WICG/webcomponents/issues/814)

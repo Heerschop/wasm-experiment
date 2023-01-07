@@ -1,11 +1,11 @@
-export async function loadWasmModule(url: string): Promise<WebAssembly.Module> {
+async function loadWasmModule(url: string): Promise<WebAssembly.Module> {
   const response = await fetch(url);
   const buffer = await response.arrayBuffer();
 
   return WebAssembly.compile(buffer);
 }
 
-export async function onLoadModuleClick(url: string): Promise<{}> {
+async function onLoadModuleClick(url: string): Promise<{}> {
   try {
     console.log('Loading module:', url);
 
@@ -22,7 +22,7 @@ export async function onLoadModuleClick(url: string): Promise<{}> {
   }
 }
 
-export async function onInstantiateClick(url: string): Promise<{}> {
+async function onInstantiateClick(url: string): Promise<{}> {
   try {
     console.log('Loading module:', url);
 
@@ -57,7 +57,7 @@ export async function onInstantiateClick(url: string): Promise<{}> {
     };
   }
 }
-export async function onUploadWasmClick(url: string): Promise<{}> {
+async function onUploadWasmClick(url: string): Promise<{}> {
   return {};
 }
 
@@ -74,8 +74,6 @@ export async function onClickSubmit(event: SubmitEvent) {
 
     if (handler !== undefined) {
       const resultElement = elements.find((item) => item.id === 'result-text');
-
-      console.log('resultElement:', resultElement);
 
       const values = elements
         .filter((element) => element.checked)
