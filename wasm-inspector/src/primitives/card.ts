@@ -1,7 +1,9 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators';
 
-@customElement('app-card')
+const elementPrefix = document?.currentScript?.attributes.getNamedItem?.('prefix')?.value ?? 'app';
+
+@customElement(elementPrefix + '-card')
 export class CardElement extends LitElement {
   @property() header = '';
 

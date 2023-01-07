@@ -7,7 +7,9 @@ declare global {
   }
 }
 
-@customElement('app-radio')
+const elementPrefix = document?.currentScript?.attributes.getNamedItem?.('prefix')?.value ?? 'app';
+
+@customElement(elementPrefix + '-radio')
 export class RadioElement extends LitElement {
   @property({ type: Boolean })
   checked: boolean = false;
@@ -92,19 +94,13 @@ export class RadioElement extends LitElement {
     }
   `;
 
-  private internals: ElementInternals;
   private proxyInput?: HTMLInputElement;
 
-  constructor() {
-    super();
-    this.internals = this.attachInternals();
-  }
-
   firstUpdated() {
-    if (this.internals && this.shadowRoot) {
+    if (this.shadowRoot) {
       const element = this.shadowRoot.querySelector<HTMLInputElement>('#input-element');
 
-      if (element && this.internals.form) {
+      if (element) {
         this.proxyInput = element.cloneNode() as HTMLInputElement;
         this.proxyInput.style.position = 'absolute';
         this.proxyInput.style.opacity = '0';
@@ -120,8 +116,7 @@ export class RadioElement extends LitElement {
             element.checkedChange?.(element.checked);
           }
         };
-
-        this.internals.form.append(this.proxyInput);
+        document.body.append(this.proxyInput);
       }
     }
   }
