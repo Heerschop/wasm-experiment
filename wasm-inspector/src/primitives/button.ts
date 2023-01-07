@@ -1,7 +1,9 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property, query } from 'lit/decorators';
 
-@customElement('app-button')
+const elementPrefix = document?.currentScript?.attributes.getNamedItem?.('prefix')?.value ?? 'app';
+
+@customElement(elementPrefix + '-button')
 export class ButtonElement extends LitElement {
   @property({ type: Boolean })
   disabled: boolean = false;
