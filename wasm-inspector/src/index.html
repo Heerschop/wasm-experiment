@@ -8,64 +8,50 @@
     <link rel="stylesheet" href="main.css" />
   </head>
   <body>
-    <file-element></file-element>
+    <!-- <file-element>
+    </file-element>
     <action-element></action-element>
     <result-element></result-element>
-    <app-button></app-button>
+    <app-button @my-event="${(e) => { console.log(e.detail.message) }}">hallo</app-button> -->
 
-    <!-- onClickSubmit(event) -->
     <form action="#" onsubmit="onClickSubmit(event); return false;">
       <div class="wrap-container">
-        <div class="card">
-          <h1>File</h1>
-          <label class="radio-button">
-            Assembly Script
-            <input type="radio" checked="checked" name="radio" value="assembly-script-release.wasm" />
-            <span class="checkmark"></span>
-          </label>
-          <label class="radio-button">
-            Emscripten-c
-            <input type="radio" name="radio" value="emscripten-c.wasm" />
-            <span class="checkmark"></span>
-          </label>
-          <label class="radio-button">
-            Dotnet
-            <input type="radio" name="radio" value="dotnet.wasm" />
-            <span class="checkmark"></span>
-          </label>
-          <label class="radio-button">
-            Rust
-            <input type="radio" name="radio" value="rust_bg.wasm" />
-            <span class="checkmark"></span>
-          </label>
-          <label class="radio-button">
-            Wat2Wasm
-            <input type="radio" name="radio" value="wat2wasm.wasm" />
-            <span class="checkmark"></span>
-          </label>
+        <app-card>
+          <h1 slot="header">File</h1>
 
-          <label class="radio-button">
-            Uploaded
-            <input type="radio" name="radio" value="uploaded.wasm" disabled />
-            <span class="checkmark"></span>
-          </label>
-        </div>
+          <app-radio name="radio" value="assembly-script-release.wasm">Assembly Script</app-radio>
+          <app-radio name="radio" value="emscripten-c.wasm">Emscripten-c</app-radio>
+          <app-radio name="radio" value="dotnet.wasm">Dotnet</app-radio>
+          <app-radio name="radio" value="rust_bg.wasm">Rust</app-radio>
+          <app-radio name="radio" value="wat2wasm.wasm">Wat2Wasm</app-radio>
+          <app-radio name="radio" value="uploaded.wasm" disabled>Uploaded</app-radio>
+        </app-card>
 
-        <div class="card">
-          <h1>Action</h1>
-          <button id="load-module">Load module</button>
-          <button id="instantiate">Instantiate</button>
-          <button id="upload-wasm" disabled>Upload WASM</button>
-        </div>
-        <div class="card">
-          <h1>Result</h1>
+        <app-card>
+          <h1 slot="header">Action</h1>
+          <app-button id="load-module">Load module</app-button>
+          <app-button id="instantiate">Instantiate</app-button>
+          <app-button id="upload-wasm" disabled>Upload WASM</app-button>
+        </app-card>
+        <app-card>
+          <h1 slot="header">Result</h1>
           <textarea id="result-text"></textarea>
-        </div>
+        </app-card>
       </div>
     </form>
 
-    <script type="module" src="main.ts"></script>
+    <script type="module">
+      import { onClickSubmit } from './main';
+
+      window.onClickSubmit = onClickSubmit;
+    </script>
     <script type="module" src="components/index.ts"></script>
     <script type="module" src="primitives/index.ts"></script>
+    <!-- <script type="module">
+      import './components';
+    </script>
+    <script type="module">
+      import './primitives';
+    </script> -->
   </body>
 </html>

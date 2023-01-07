@@ -3,6 +3,8 @@
     "experimentalDecorators": true,
     "strict": true,
     "isolatedModules": true,
-    "lib": ["es2017", "dom"]
+    "moduleResolution": "node",
+    "lib": ["es2017", "dom"],
+    "target": "ESNext"
   }
 }
