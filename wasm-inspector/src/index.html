@@ -15,10 +15,9 @@
     <app-button @my-event="${(e) => { console.log(e.detail.message) }}">hallo</app-button> -->
 
     <form action="#" onsubmit="onClickSubmit(event); return false;">
-      <div class="wrap-container">
+      <app-flex gap="12" style="margin-top: calc(2rem + 6%)" direction="row" wrap="wrap" justify="center">
         <app-card>
           <h1 slot="header">File</h1>
-
           <app-radio name="radio" value="assembly-script-release.wasm">Assembly Script</app-radio>
           <app-radio name="radio" value="emscripten-c.wasm">Emscripten-c</app-radio>
           <app-radio name="radio" value="dotnet.wasm">Dotnet</app-radio>
@@ -37,7 +36,7 @@
           <h1 slot="header">Result</h1>
           <textarea id="result-text"></textarea>
         </app-card>
-      </div>
+      </app-flex>
     </form>
 
     <script type="module">
