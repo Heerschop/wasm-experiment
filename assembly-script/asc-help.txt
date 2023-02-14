@@ -1,0 +1,135 @@
+SYNTAX
+  asc [entryFile ...] [options]
+
+EXAMPLES
+  asc hello.ts
+  asc hello.ts -o hello.wasm -t hello.wat
+  asc hello1.ts hello2.ts -o -O > hello.wasm
+  asc --config asconfig.json --target release
+
+OPTIONS
+
+ General
+
+  --version, -v         Prints just the compiler's version and exits.
+  --help, -h            Prints this message and exits.
+  --config              Configuration file to apply. CLI arguments take precedence.
+  --target              Configuration file target to use. Defaults to 'release'.
+
+ Optimization
+
+  --optimize, -O        Optimizes the module. Typical shorthands are:
+
+                         Default optimizations   -O
+                         Make a release build    -O --noAssert
+                         Make a debug build      --debug
+                         Optimize for speed      -Ospeed
+                         Optimize for size       -Osize
+
+  --optimizeLevel       How much to focus on optimizing code. [0-3]
+  --shrinkLevel         How much to focus on shrinking code size. [0-2, s=1, z=2]
+  --converge            Re-optimizes until no further improvements can be made.
+  --noAssert            Replaces assertions with just their value without trapping.
+
+ Output
+
+  --outFile, -o         Specifies the WebAssembly output file (.wasm).
+  --textFile, -t        Specifies the WebAssembly text output file (.wat).
+  --bindings, -b        Specifies the bindings to generate (.js + .d.ts).
+
+                          esm  JavaScript bindings & typings for ESM integration.
+                          raw  Like esm, but exports just the instantiate function.
+                               Useful where modules are meant to be instantiated
+                               multiple times or non-ESM imports must be provided.
+
+ Debugging
+
+  --sourceMap           Enables source map generation. Optionally takes the URL
+                        used to reference the source map from the binary file.
+  --debug               Enables debug information in emitted binaries.
+
+ Features
+
+  --importMemory        Imports the memory from 'env.memory'.
+  --noExportMemory      Does not export the memory as 'memory'.
+  --initialMemory       Sets the initial memory size in pages.
+  --maximumMemory       Sets the maximum memory size in pages.
+  --sharedMemory        Declare memory as shared. Requires maximumMemory.
+  --zeroFilledMemory    Assume imported memory is zeroed. Requires importMemory.
+  --importTable         Imports the function table from 'env.table'.
+  --exportTable         Exports the function table as 'table'.
+  --exportStart         Exports the start function using the specified name instead
+                        of calling it implicitly. Useful to obtain the exported memory
+                        before executing any code accessing it.
+  --runtime             Specifies the runtime variant to include in the program.
+
+                         incremental  TLSF + incremental GC (default)
+                         minimal      TLSF + lightweight GC invoked externally
+                         stub         Minimal runtime stub (never frees)
+                         ...          Path to a custom runtime implementation
+
+  --exportRuntime       Always exports the runtime helpers (__new, __collect, __pin etc.).
+                        Automatically determined when generation of --bindings is enabled.
+  --stackSize           Overrides the stack size. Only relevant for incremental GC
+                        or when using a custom runtime that requires stack space.
+                        Defaults to 0 without and to 32768 with incremental GC.
+  --enable              Enables WebAssembly features being disabled by default.
+
+                         threads             Threading and atomic operations.
+                         simd                SIMD types and operations.
+                         reference-types     Reference types and operations.
+                         gc                  Garbage collection (WIP).
+                         stringref           String reference types.
+
+  --disable             Disables WebAssembly features being enabled by default.
+
+                         mutable-globals     Mutable global imports and exports.
+                         sign-extension      Sign-extension operations
+                         nontrapping-f2i     Non-trapping float to integer ops.
+                         bulk-memory         Bulk memory operations.
+
+  --use, -u             Aliases a global object under another name, e.g., to switch
+                        the default 'Math' implementation used: --use Math=JSMath
+                        Can also be used to introduce an integer constant.
+  --lowMemoryLimit      Enforces very low (<64k) memory constraints.
+
+ Linking
+
+  --memoryBase          Sets the start offset of emitted memory segments.
+  --tableBase           Sets the start offset of emitted table elements.
+
+ API
+
+  --transform           Specifies the path to a custom transform to load.
+
+ Binaryen
+
+  --trapMode            Sets the trap mode to use.
+
+                         allow  Allow trapping operations. This is the default.
+                         clamp  Replace trapping operations with clamping semantics.
+                         js     Replace trapping operations with JS semantics.
+
+  --runPasses           Specifies additional Binaryen passes to run after other
+                        optimizations, if any. See: Binaryen/src/passes/pass.cpp
+  --noValidate          Skips validating the module using Binaryen.
+
+ Other
+
+  --baseDir             Specifies the base directory of input and output files.
+  --noColors            Disables terminal colors.
+  --noUnsafe            Disallows the use of unsafe features in user code.
+                        Does not affect library files and external modules.
+  --disableWarning      Disables warnings matching the given diagnostic code.
+                        If no diagnostic code is given, all warnings are disabled.
+  --noEmit              Performs compilation as usual but does not emit code.
+  --showConfig          Print computed compiler options and exit.
+  --stats               Prints statistics on I/O and compile times.
+  --pedantic            Make yourself sad for no good reason.
+  --lib                 Adds one or multiple paths to custom library components and
+                        uses exports of all top-level files at this path as globals.
+  --path                Adds one or multiple paths to package resolution, similar
+                        to node_modules. Prefers an 'ascMain' entry in a package's
+                        package.json and falls back to an inner 'assembly/' folder.
+  --wasm                Uses the specified Wasm binary of the compiler.
+  -- ...                Specifies node.js options (CLI only). See: node --help

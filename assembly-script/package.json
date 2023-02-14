@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^18.13.0",
     "assemblyscript": "^0.24.1"
   },
   "type": "module",
