@@ -6,12 +6,6 @@
       "sourceMap": true,
       "debug": true
     },
-    "interpreter": {
-      "outFile": "build/interpreter.wasm",
-      "textFile": "build/interpreter.wat",
-      "sourceMap": true,
-      "debug": true
-    },
     "release": {
       "outFile": "build/release.wasm",
       "textFile": "build/release.wat",
@@ -20,6 +14,12 @@
       "shrinkLevel": 0,
       "converge": false,
       "noAssert": false
+    },
+    "interpreter": {
+      "outFile": "build/interpreter.wasm",
+      "textFile": "build/interpreter.wat",
+      "sourceMap": true,
+      "debug": true
     }
   },
   "options": {
