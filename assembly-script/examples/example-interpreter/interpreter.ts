@@ -1,7 +1,3 @@
-// npx asc assembly/interpreter.ts --target debug && wasmer run ./build/debug.wasm -i main
-// npx asc assembly/interpreter.ts --target debug
-// npx asc assembly/interpreter.ts --target release &&  node test.js
-// npx asc assembly/interpreter.ts --target debug --bindings esm -o build/interpreter.wasm
 // npx asc assembly/interpreter.ts --target interpreter
 export const NOP = 0x00;
 export const HLT = 0x01;
