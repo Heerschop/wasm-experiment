@@ -37,4 +37,7 @@ async function mainTest() {
   }
 }
 
+// npx asc assembly/interpreter.ts --target interpreter
+// node test.js
+
 mainTest();
