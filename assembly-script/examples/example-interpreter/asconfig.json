@@ -1,0 +1,13 @@
+{
+  "targets": {
+    "interpreter": {
+      "outFile": "build/interpreter.wasm",
+      "textFile": "build/interpreter.wat",
+      "sourceMap": true,
+      "debug": true
+    }
+  },
+  "options": {
+    "bindings": "esm"
+  }
+}
