@@ -1,4 +1,4 @@
-import { add } from './build/wasm';
+import { add } from './build/wasm.js';
 
 async function main(): Promise<void> {
   console.log('Hello Kerbin!');
