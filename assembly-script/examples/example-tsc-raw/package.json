@@ -1,0 +1,9 @@
+{
+  "name": "example-tsc",
+  "scripts": {
+    "start": "ts-node-esm ./main.ts",
+    "build": "asc assembly/wasm.ts --target example-tsc"
+  },
+  "type": "module"
+}
+
