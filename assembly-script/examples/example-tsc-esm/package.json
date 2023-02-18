@@ -2,7 +2,7 @@
   "name": "example-tsc",
   "scripts": {
     "start": "ts-node-esm ./main.ts",
-    "build": "asc assembly/wasm.ts --target example-tsc"
+    "build": "rm -rf ./build && asc assembly/wasm.ts --target example-tsc && node ../patch-bindings.js ./build/wasm.js"
   },
   "type": "module"
 }
