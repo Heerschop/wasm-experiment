@@ -6,12 +6,18 @@ const colors = {
   red: '\x1b[31m',
   green: '\x1b[32m',
   yellow: '\x1b[33m',
+  orange: '\x1b[38;2;255;165;0m',
   blue: '\x1b[94m',
   cyan: '\x1b[36m',
   bold: '\x1b[1m',
   dim: '\x1b[2m',
   normal: '\x1b[0m',
 };
+
+const PATCHED = 0;
+const DESIRED = 1;
+const SKIPPED = 2;
+const ERROR = 3;
 
 async function patchBindings(handle) {
   const buffer = await handle.readFile();
@@ -26,10 +32,10 @@ async function patchBindings(handle) {
   if (text !== patched) {
     handle.write(patched, 0);
 
-    return true;
+    return PATCHED;
   }
 
-  return false;
+  return text.includes('const instance').includes('instance: instance') ? DESIRED : SKIPPED;
 }
 
 async function patchTypeings(handle) {
@@ -40,19 +46,22 @@ async function patchTypeings(handle) {
   if (text !== patched) {
     handle.write(patched, 0);
 
-    return true;
+    return PATCHED;
   }
 
-  return false;
+  return text.includes('instance: instance') ? DESIRED : SKIPPED;
 }
 
 async function patchFile(fileName) {
   const parsed = path.parse(fileName);
   const bindings = path.join(parsed.dir, parsed.name + parsed.ext);
   const typeings = path.join(parsed.dir, parsed.name + '.d.ts');
-  const statusPatched = colors.bold + colors.yellow + 'patched' + colors.normal;
-  const statusDesired = colors.bold + colors.green + 'desired' + colors.normal;
-  const statusError = colors.bold + colors.red + ' error ' + colors.normal;
+  const status = {
+    [PATCHED]: `[ ${colors.bold + colors.yellow + 'patched' + colors.normal} ]`,
+    [DESIRED]: `[ ${colors.bold + colors.green + 'desired' + colors.normal} ]`,
+    [SKIPPED]: `[ ${colors.bold + colors.orange + 'skipped' + colors.normal} ]`,
+    [ERROR]: `[ ${colors.bold + colors.red + ' error ' + colors.normal} ]`,
+  };
 
   try {
     process.stdout.write('\r' + bindings.padEnd(40));
@@ -61,22 +70,15 @@ async function patchFile(fileName) {
     const typeingsHandle = await fs.open(typeings, 'r+');
 
     process.stdout.write('\r' + bindings.padEnd(40));
-    if (await patchBindings(bindingsHandle)) {
-      process.stdout.write(`[ ${statusPatched} ]\n`);
-    } else {
-      process.stdout.write(`[ ${statusDesired} ]\n`);
-    }
+    process.stdout.write(status[await patchBindings(bindingsHandle)] + '\n');
 
     process.stdout.write('\r' + typeings.padEnd(40));
-    if (await patchTypeings(typeingsHandle)) {
-      process.stdout.write(`[ ${statusPatched} ]\n`);
-    } else {
-      process.stdout.write(`[ ${statusDesired} ]\n`);
-    }
+    process.stdout.write(status[await patchTypeings(typeingsHandle)] + '\n');
+
     bindingsHandle.close();
     typeingsHandle.close();
   } catch (error) {
-    process.stdout.write(`[ ${statusError} ] ${colors.dim + (error.message || error) + colors.normal}\n`);
+    process.stdout.write(status[ERROR] + ` ${colors.dim + (error.message || error) + colors.normal}\n`);
   }
 }
 
