@@ -1,0 +1,13 @@
+{
+  "targets": {
+    "example-tsc": {
+      "outFile": "build/wasm.wasm",
+      "textFile": "build/wasm.wat",
+      "sourceMap": true,
+      "debug": true
+    }
+  },
+  "options": {
+    "bindings": "raw"
+  }
+}
