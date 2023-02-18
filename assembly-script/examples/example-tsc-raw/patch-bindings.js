@@ -22,12 +22,18 @@ const ERROR = 3;
 async function patchBindings(handle) {
   const buffer = await handle.readFile();
   const text = buffer.toLocaleString();
+
+  if (text.includes('const instance')) return DESIRED;
+
   let patched = text.replace(
     /(\s*)const\s*\{\s*(\w+)\s*\}(\s*=\s*await\s+WebAssembly\.instantiate\s*\(\s*module\s*,\s*adaptedImports\s*\)\s*;)/g,
-    '$1const instance$3$1const { $2 } = instance;'
+    '$1const instance$3$1const $2 = Object.setPrototypeOf({instance: instance}, instance.exports);'
   );
 
-  patched = patched.replace(/(\s*)return\s+(adaptedExports)\s*;/g, '$1return { exports: $2, instance: instance };');
+  patched = patched.replace(
+    /(\n} = await \(async url => instantiate\()/g,
+    ',\n  instance$1'
+  );
 
   if (text !== patched) {
     handle.write(patched, 0);
@@ -35,13 +41,26 @@ async function patchBindings(handle) {
     return PATCHED;
   }
 
-  return text.includes('const instance').includes('instance: instance') ? DESIRED : SKIPPED;
+  return SKIPPED;
 }
 
 async function patchTypeings(handle) {
   const buffer = await handle.readFile();
   const text = buffer.toLocaleString();
-  let patched = text.replace(/: Promise<(typeof \w+)>;/g, ': Promise<{ exports: $1; instance: Instance }>;');
+
+  if (text.includes('const instance: WebAssembly.Instance;')) return DESIRED;
+
+  let patched = text.replace(
+    /(declare namespace __AdaptedExports {)/g,
+    '$1\n  /** Exported instance */\n  export const instance: WebAssembly.Instance;'
+  );
+
+  if (text === patched) {
+    patched = text.replace(
+      /(export declare const memory: WebAssembly\.Memory;)/g,
+      '$1\n/** Exported instance */\nexport declare const instance: WebAssembly.Instance;\n'
+    );
+  }
 
   if (text !== patched) {
     handle.write(patched, 0);
@@ -49,7 +68,7 @@ async function patchTypeings(handle) {
     return PATCHED;
   }
 
-  return text.includes('instance: instance') ? DESIRED : SKIPPED;
+  return SKIPPED;
 }
 
 async function patchFile(fileName) {
