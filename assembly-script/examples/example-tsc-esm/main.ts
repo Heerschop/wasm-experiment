@@ -14,7 +14,7 @@ const colors = {
   normal: '\x1b[0m',
 };
 
-function dumpLine(bytes: ArrayLike<number>, start: number, end: number, columnWidth = 8, columnCount = 4): number {
+function dumpLine(bytes: ArrayLike<number>, start: number, end: number, textDecoder: TextDecoder, columnWidth = 8, columnCount = 4): number {
   const length = columnWidth * columnCount;
   let data = '';
   let text = '';
@@ -29,9 +29,10 @@ function dumpLine(bytes: ArrayLike<number>, start: number, end: number, columnWi
       data += '   ';
       text += '  ';
     }
-
     if (byte !== undefined) {
-      text += (byte >= 0x20 && byte < 0x7f) || byte > 0xa0 ? String.fromCharCode(byte) : '.';
+      const value = textDecoder.decode(Uint8Array.of(byte), { stream: true });
+      text += value.replace(/[\u0000-\u001F\u007F-\u009F\�]/g, '.')[0] ?? '.';
+
       data += byte.toString(16).padStart(2, '0') + ' ';
     } else {
       text += ' ';
@@ -42,16 +43,17 @@ function dumpLine(bytes: ArrayLike<number>, start: number, end: number, columnWi
   console.log(
     `${colors.bold + address.toString(16).padStart(8, '0') + colors.normal} ` +
       `${colors.dim + data + colors.normal}   ` +
-      `${colors.bold + '|' + text + '  |' + colors.normal}`
+      `${colors.bold + '|' + text + '  |' + colors.normal}`,
   );
 
   return address + length;
 }
-function hexDump(bytes: ArrayLike<number>, offset: number = 0, length?: number, columnWidth = 8, columnCount = 4) {
-  const end = length === undefined ? bytes.length - offset : offset + length;
+function hexDump(bytes: ArrayLike<number>, offset: number = 0, length?: number, decoder: string = 'ascii', columnWidth = 8, columnCount = 4): void {
+  const end = length === undefined ? bytes.length : offset + length;
+  const textDecoder = new TextDecoder(decoder, { ignoreBOM: false, fatal: false });
 
   while (offset < end) {
-    offset = dumpLine(bytes, offset, end, columnWidth, columnCount);
+    offset = dumpLine(bytes, offset, end, textDecoder, columnWidth, columnCount);
   }
 }
 
@@ -123,6 +125,16 @@ const bytes = [
 const textDecoder = new TextDecoder('utf8');
 const textEncoder = new TextEncoder();
 
-hexDump(textEncoder.encode('Hallo "€"'));
+// hexDump(textEncoder.encode('Hallo "€"'));
+// hexDump(textEncoder.encode('Hallo "€"'), undefined, undefined, new TextDecoder('utf8'));
+// hexDump(textEncoder.encode('Hallo "€"'), undefined, undefined, new TextDecoder('ascii'));
 
-console.log(textDecoder.decode(new Uint8Array([0x22, 0xe2, 0x82, 0xac, 0x22]).buffer));
+hexDump(bytes, undefined, undefined, 'ascii');
+console.log();
+console.log();
+hexDump(bytes, undefined, undefined, 'utf-8');
+
+const array = new Uint8Array([0x22, 0xe2, 0x82, 0xac, 0x22]);
+console.log(textDecoder.decode(array, { stream: true }));
+
+hexDump(array, undefined, undefined, 'utf-8');
