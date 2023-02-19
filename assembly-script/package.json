@@ -24,5 +24,25 @@
       "import": "./build/release.js",
       "types": "./build/release.d.ts"
     }
+  },
+  "prettier": {
+    "printWidth": 160,
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": true,
+    "singleQuote": true,
+    "quoteProps": "preserve",
+    "trailingComma": "all",
+    "bracketSpacing": true,
+    "arrowParens": "always",
+    "overrides": [
+      {
+        "files": "*.json",
+        "options": {
+          "semi": true,
+          "printWidth": 24
+        }
+      }
+    ]
   }
 }
