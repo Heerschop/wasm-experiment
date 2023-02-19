@@ -14,7 +14,7 @@ const colors = {
   normal: '\x1b[0m',
 };
 
-function dumpLine(bytes: ArrayLike<number>, start: number, end: number, textDecoder: TextDecoder, columnWidth = 8, columnCount = 4): number {
+function dumpLine(bytes: ArrayLike<number>, start: number, end: number, textDecoder: TextDecoder, columnCount: number, columnWidth: number): number {
   const length = columnWidth * columnCount;
   let data = '';
   let text = '';
@@ -48,12 +48,59 @@ function dumpLine(bytes: ArrayLike<number>, start: number, end: number, textDeco
 
   return address + length;
 }
-function hexDump(bytes: ArrayLike<number>, offset: number = 0, length?: number, decoder: string = 'ascii', columnWidth = 8, columnCount = 4): void {
+
+function hexDump(bytes: ArrayLike<number>): void;
+function hexDump(bytes: ArrayLike<number>, decoder: string): void;
+function hexDump(bytes: ArrayLike<number>, offset: number): void;
+function hexDump(bytes: ArrayLike<number>, offset: number, length?: number): void;
+function hexDump(bytes: ArrayLike<number>, offset: number, decoder: string): void;
+function hexDump(bytes: ArrayLike<number>, offset: number, length: number, decoder: string): void;
+function hexDump(bytes: ArrayLike<number>, decoder: string, columnCount: number): void;
+function hexDump(bytes: ArrayLike<number>, decoder: string, columnCount: number, columnWidth: number): void;
+function hexDump(bytes: ArrayLike<number>, offset: number, decoder: string, columnCount: number): void;
+function hexDump(bytes: ArrayLike<number>, offset: number, decoder: string, columnCount: number, columnWidth: number): void;
+function hexDump(bytes: ArrayLike<number>, offset: number, length: number, decoder: string, columnCount: number): void;
+function hexDump(bytes: ArrayLike<number>, offset: number, length: number, decoder: string, columnCount: number, columnWidth: number): void;
+function hexDump(
+  bytes: ArrayLike<number>,
+  arg1: string | number = 'ascii',
+  arg2: string | number = 'ascii',
+  arg3: string | number = 'ascii',
+  arg4?: number,
+  arg5?: number,
+): void {
+  let offset = 0;
+  let length = bytes.length;
+  let decoder = 'ascii';
+  let columnWidth = 8;
+  let columnCount = 4;
+
+  if (typeof arg1 === 'string') {
+    decoder = arg1;
+    if (typeof arg2 === 'number') columnCount = arg2;
+    if (typeof arg3 === 'number') columnWidth = arg3;
+  } else if (typeof arg2 === 'string') {
+    decoder = arg2;
+    if (typeof arg1 === 'number') offset = arg1;
+    if (typeof arg3 === 'number') columnCount = arg3;
+    if (typeof arg4 === 'number') columnWidth = arg4;
+  } else if (typeof arg3 === 'string') {
+    decoder = arg3;
+    if (typeof arg1 === 'number') offset = arg1;
+    if (typeof arg2 === 'number') length = arg2;
+    if (typeof arg4 === 'number') columnCount = arg4;
+    if (typeof arg5 === 'number') columnWidth = arg5;
+  } else {
+    if (typeof arg1 === 'number') offset = arg1;
+    if (typeof arg2 === 'number') length = arg2;
+  }
+
+  // //function hexDump(bytes: ArrayLike<number>, offset: number = 0, length?: number, decoder: string = 'ascii', columnWidth = 8, columnCount = 4): void {
   const end = length === undefined ? bytes.length : offset + length;
   const textDecoder = new TextDecoder(decoder, { ignoreBOM: false, fatal: false });
 
   while (offset < end) {
-    offset = dumpLine(bytes, offset, end, textDecoder, columnWidth, columnCount);
+    offset = dumpLine(bytes, offset, end, textDecoder, columnCount, columnWidth);
   }
 }
 
@@ -129,12 +176,18 @@ const textEncoder = new TextEncoder();
 // hexDump(textEncoder.encode('Hallo "€"'), undefined, undefined, new TextDecoder('utf8'));
 // hexDump(textEncoder.encode('Hallo "€"'), undefined, undefined, new TextDecoder('ascii'));
 
-hexDump(bytes, undefined, undefined, 'ascii');
+// hexDump(bytes, 'ascii');
+// console.log();
+// console.log();
+// hexDump(bytes, 'utf-8');
+
+// const array = new Uint8Array([0x22, 0xe2, 0x82, 0xac, 0x22]);
+// console.log(textDecoder.decode(array, { stream: true }));
+
+// hexDump(array, 'utf-8');
+// hexDump(array, 0, 10);
+
+hexDump(bytes, 0x03,0x10 ,'ascii', 2, 4);
 console.log();
 console.log();
-hexDump(bytes, undefined, undefined, 'utf-8');
-
-const array = new Uint8Array([0x22, 0xe2, 0x82, 0xac, 0x22]);
-console.log(textDecoder.decode(array, { stream: true }));
-
-hexDump(array, undefined, undefined, 'utf-8');
+hexDump(bytes, 'utf8');
