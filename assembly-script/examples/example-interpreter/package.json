@@ -1,0 +1,9 @@
+{
+  "name": "example-interpreter",
+  "scripts": {
+    "start": "ts-node-esm ./main.ts",
+    "build": "rm -rf ./build && asc assembly/interpreter.ts --target interpreter && node ../patch-bindings.js ./build/interpreter.js"
+  },
+  "type": "module"
+}
+

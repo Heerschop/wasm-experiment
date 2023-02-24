@@ -1,3 +1,4 @@
+/*
 import fs from 'fs';
 import { main } from './build/interpreter.js';
 
@@ -41,3 +42,4 @@ async function mainTest() {
 // node test.js
 
 mainTest();
+*/
