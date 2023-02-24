@@ -1,3 +1,5 @@
+import { console } from './console';
+
 // npx asc assembly/interpreter.ts --target interpreter
 export const NOP = 0x00;
 export const HLT = 0x01;
@@ -74,17 +76,20 @@ function interpreter(opcodes: Array<i32>): Controller {
   return controller;
 }
 
-@external("env", "console.log")
-declare function consoleLog(s: string): void
+// class console {
+//   static log:(s: string)=> void=consoleLog;
+// }
 
-export function main(): Int32Array {
+export function example(): Int32Array {
   const controller = new Controller();
   var NULL_STORAGE = new Array<i32>(0);
-  var map = new Map<string,string>()
+  var map = new Map<string, string>();
 
-  map.set('aa','bb');
+  map.set('aa', 'bb');
 
-  consoleLog('aaaa');
+  //console.log('aaaa');
+  //log('aaaa');
+  console.log('bbbb');
 
   return new Int32Array(10);
 }
