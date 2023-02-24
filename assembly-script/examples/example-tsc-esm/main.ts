@@ -1,5 +1,5 @@
 import * as exports from './build/wasm.js';
-import { hexDump } from './debugging.js';
+import { hexDump } from '../debugging.js';
 
 const { add, set, text, memory } = exports;
 
