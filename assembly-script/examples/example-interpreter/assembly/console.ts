@@ -1,6 +1,6 @@
 
 export namespace console {
   @external("env", "console.log")
-  declare function log(s: string): void
+  export declare function log(message: string): void;
 }
 

@@ -1,6 +1,4 @@
-import { console } from './console';
-
-// npx asc assembly/interpreter.ts --target interpreter
+// Opcodes
 export const NOP = 0x00;
 export const HLT = 0x01;
 export const JMP = 0x02;
@@ -29,51 +27,88 @@ export const SUB = 0x18;
 export const MUL = 0x19;
 export const DIV = 0x1a;
 
-class Controller {
-  ip: i32;
-  local: Array<i32>;
-  input: Array<i32>;
-  scope: Array<i32>;
-  callStack: Array<i32>;
-  dataStack: Array<i32>;
+// class Controller {
+//   ip: i32;
+//   local: Array<i32>;
+//   input: Array<i32>;
+//   scope: Array<i32>;
+//   callStack: Array<i32>;
+//   dataStack: Array<i32>;
 
-  constructor() {
-    this.ip = 0;
-    this.local = new Array<i32>(0);
-    this.input = new Array<i32>(0);
-    this.scope = new Array<i32>(0);
-    this.callStack = new Array<i32>(0);
-    this.dataStack = new Array<i32>(0);
-  }
+//   constructor() {
+//     this.ip = 0;
+//     this.local = new Array<i32>(0);
+//     this.input = new Array<i32>(0);
+//     this.scope = new Array<i32>(0);
+//     this.callStack = new Array<i32>(0);
+//     this.dataStack = new Array<i32>(0);
+//   }
+// }
+
+// type Resolver = (opcodes: Array<i32>) => Array<i32>;
+// type Operation = (opcodes: Array<i32>) => void;
+
+// function interpreter(opcodes: Array<i32>): Controller {
+//   const NULL_STORAGE = new Array<i32>(0);
+//   const controller = new Controller();
+//   const memory = controller;
+
+//   // const resolvers = new Array<Resolver>(0);
+//   const resolvers: Array<Resolver | null> = [
+//     null,
+//     null,
+//     null,
+//     null,
+//     null,
+//     null,
+//     null,
+//     /*NEW:07*/ (opcodes) => {
+//       return [];
+//     },
+//     /*LOC:08*/ (opcodes) => {
+//       return memory.local;
+//     },
+//     /*INP:09*/ (opcodes) => {
+//       return memory.input;
+//     },
+//     /*SCO:0a*/ (opcodes) => {
+//       return memory.scope;
+//     },
+//     /*NUL:0b*/ (opcodes) => {
+//       return NULL_STORAGE;
+//     },
+//   ];
+
+//   const operations: Array<Operation | null> = [
+//     /*NOP:00*/ (opcodes) => {},
+//     /*HLT:01*/ (opcodes) => {
+//       controller.ip = Number.MAX_SAFE_INTEGER;
+//     },
+//     /*JMP:02*/ (opcodes) => {
+//       //let opcode;
+//       //const address = (opcode = opcodes[controller.ip++]).constructor === Array ? resolvers[opcode[0] as Opcode]!(opcode) : opcode;
+//       //controller.ip = address;
+//     },
+//   ];
+
+//   while (controller.ip < opcodes.length) {
+//     operations[opcodes[controller.ip++]]!(opcodes);
+//   }
+
+//   return controller;
+// }
+
+
+class Command {
+
 }
 
-type Resolver = (opcodes: Array<i32>) => void;
+class Resolver extends Command {
 
-function interpreter(opcodes: Array<i32>): Controller {
-  const NULL_STORAGE = new Array<i32>(0);
-  const controller = new Controller();
-  const memory = controller;
+}
 
-  // const resolvers = new Array<Resolver>(0);
-  const resolvers: Array<Resolver> = [
-    /*NEW:07*/ (opcodes) => {
-      return [];
-    },
-    /*LOC:08*/ (opcodes) => {
-      return [];
-    },
-    /*INP:09*/ (opcodes) => {
-      return [];
-    },
-    /*SCO:0a*/ (opcodes) => {
-      return [];
-    },
-    /*NUL:0b*/ (opcodes) => {
-      return [];
-    },
-  ];
+class Operation extends Command {
 
-  return controller;
 }
 
 // class console {
@@ -81,14 +116,14 @@ function interpreter(opcodes: Array<i32>): Controller {
 // }
 
 export function example(): Int32Array {
-  const controller = new Controller();
-  var NULL_STORAGE = new Array<i32>(0);
-  var map = new Map<string, string>();
+  const opcodes: Array<Command> = [
+    new Command(),
+    new Resolver(),
+    new Command(),
+  ];
 
-  map.set('aa', 'bb');
+  //interpreter(opcodes);
 
-  //console.log('aaaa');
-  //log('aaaa');
   console.log('bbbb');
 
   return new Int32Array(10);
