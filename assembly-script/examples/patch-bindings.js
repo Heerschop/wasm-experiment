@@ -27,12 +27,17 @@ async function patchBindings(handle) {
 
   let patched = text.replace(
     /(\s*)const\s*\{\s*(\w+)\s*\}(\s*=\s*await\s+WebAssembly\.instantiate\s*\(\s*module\s*,\s*adaptedImports\s*\)\s*;)/g,
-    '$1const instance$3$1const $2 = Object.setPrototypeOf({instance: instance}, instance.exports);'
+    '$1const instance$3$1const $2 = Object.setPrototypeOf({ instance: instance }, instance.exports);',
   );
 
   patched = patched.replace(
-    /(\n} = await \(async url => instantiate\()/g,
-    ',\n  instance$1'
+    /(\s*)const\s*\{\s*(\w+)\s*\}(\s*=\s*await\s+WebAssembly\.instantiate\s*\(\s*module\s*,\s*imports\s*\)\s*;)/g,
+    '$1const instance$3$1const $2 = Object.setPrototypeOf({ instance: instance }, instance.exports);',
+  );
+
+  patched = patched.replace(
+    /(text)((\n?)\s*\}\s*=\s*await\s*\(async\s*(\(?)\s*url\s*(\)?)\s*=>(\n|\s*)instantiate\()/g,
+    '$1,$3  instance$2'
   );
 
   if (text !== patched) {
@@ -50,15 +55,12 @@ async function patchTypeings(handle) {
 
   if (text.includes('const instance: WebAssembly.Instance;')) return DESIRED;
 
-  let patched = text.replace(
-    /(declare namespace __AdaptedExports {)/g,
-    '$1\n  /** Exported instance */\n  export const instance: WebAssembly.Instance;'
-  );
+  let patched = text.replace(/(declare namespace __AdaptedExports {)/g, '$1\n  /** Exported instance */\n  export const instance: WebAssembly.Instance;');
 
   if (text === patched) {
     patched = text.replace(
       /(export declare const memory: WebAssembly\.Memory;)/g,
-      '$1\n/** Exported instance */\nexport declare const instance: WebAssembly.Instance;\n'
+      '$1\n/** Exported instance */\nexport declare const instance: WebAssembly.Instance;\n',
     );
   }
 
