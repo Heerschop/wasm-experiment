@@ -3,5 +3,5 @@ export function add(a: i32, b: i32): i32 {
 }
 
 export function text(): string {
-  return 'I Love You';
+  return 'Hello world!';
 }
