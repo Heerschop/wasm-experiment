@@ -12,6 +12,16 @@ npm start
 node ./tests/index.js
 ```
 
+### example-tsc-esm
+```bash
+cd assembly-script/examples/example-tsc-esm
+
+npm install
+
+npm run build
+npm start
+```
+
 ### [Emscripten C/C++](https://developer.mozilla.org/en-US/docs/WebAssembly/C_to_wasm)
 
 - Make sure the `emsdk` is located in the `emscripten-c\emsdk` directory. [Download and install Emscripten](https://emscripten.org/docs/getting_started/downloads.html)
